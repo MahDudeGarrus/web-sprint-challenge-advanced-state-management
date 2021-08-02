@@ -1,8 +1,36 @@
 
 export const initialState = {
+    smurfs: [],
+    isLoading: false,
+    error: ''
 }
 
-const reducer = ()=>{
+const reducer = (state, action)=> {
+    switch(action.type) {
+        case(IS_FETCHING):
+            return({ 
+                ...state, 
+                isLoading: true
+            })
+        case(FETCHING_SUCCESS):
+            return({ 
+                ...state, 
+                isLoading:false, 
+                smurfs: action.payload
+            })
+        case(FETCHING_FAILURE):
+            return({ 
+                ...state, 
+                isLoading:false, 
+                error: action.payload
+            })
+        case(ADDING_SMURF):
+            return({ ...state, smurfs: [...state.smurf, action.payload], isLoading: true})
+        case(ADD_ERROR):
+            return({ ...state, error: 'Error: All fields are required for submittion'})
+        default:
+            return state;
+    }
 }
 
 //**************DO NOT EDIT ANY CODE BEYOND THIS POINT**************//
