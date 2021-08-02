@@ -1,6 +1,9 @@
+import { IS_FETCHING, FETCHING_SUCCESS, FETCHING_FAILURE, ADDING_SMURF, ADD_ERROR } from "../actions";
 
 export const initialState = {
-    smurfs: [],
+    smurfs: [
+        { name: '', nickname: '', position: '', description: ''}
+    ],
     isLoading: false,
     error: ''
 }
@@ -25,7 +28,10 @@ const reducer = (state, action)=> {
                 error: action.payload
             })
         case(ADDING_SMURF):
-            return({ ...state, smurfs: [...state.smurf, action.payload], isLoading: true})
+            return({ 
+                ...state, 
+                smurfs: [...state.smurf, { name: action.payload, nickname: action.payload, position: action.payload, description: action.payload}]
+            })
         case(ADD_ERROR):
             return({ ...state, error: 'Error: All fields are required for submittion'})
         default:
